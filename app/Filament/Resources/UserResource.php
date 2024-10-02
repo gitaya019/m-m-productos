@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Relationship;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\TrashedFilter;
 
 class UserResource extends Resource
 {
@@ -53,6 +54,7 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('verified')
                 ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
+                TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -69,7 +71,8 @@ class UserResource extends Resource
                     $user->save();
                 }),
                 Tables\Actions\DeleteAction::make(),
-
+                Tables\Actions\RestoreAction::make(),  
+                Tables\Actions\ForceDeleteAction::make(),  
             ])
             ->bulkActions([
                 //Tables\Actions\BulkActionGroup::make([
