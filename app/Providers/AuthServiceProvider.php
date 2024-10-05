@@ -21,7 +21,6 @@ use App\Models\Proveedor;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Venta;
-use Database\Factories\UserFactory;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -35,7 +34,6 @@ class AuthServiceProvider extends ServiceProvider
         Producto::class => ProductoPolicy::class,
         Compra::class => CompraPolicy::class,
         Proveedor::class => ProveedorPolicy::class,
-        Role::class => RolePolicy::class,
         User::class => UserPolicy::class,
         Venta::class => VentaPolicy::class,
 
